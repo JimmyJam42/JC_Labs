@@ -5,7 +5,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 /*
- *	Load fro
+ *	Load from file solution testing
+ *	Author James Collins
  *
  */
 
@@ -15,20 +16,21 @@ public class MapManager : MonoBehaviour
 	GameObject ObjectToInstantiate;
 	public LevelManager levelmanager;
 
-	public int SpawnCounter;
+	public int InstantiateCounter;
 
-	//
-	public String FirstLevelObject;
-	public String SecondLevelObject;
-	public String thridLevelObject;
-	public String FourthLevelObject;
+
+	public List<String> LevelFilePaths;
+
+
+	String FirstLevelObject, SecondLevelObject, thridLevelObject, FourthLevelObject;
 
 	public List<GameObject> ListOfActiveGameObjects;
 
 	// Use this for initialization
 	void Start()
 	{
-		SpawnLoop(SpawnCounter, FirstLevelObject);
+		//InstantiateObjectLoop(InstantiateCounter, FirstLevelObject);
+		InstantiateObjectLoop(InstantiateCounter, LevelFilePaths[0]);
 	}
 
 	// Update is called once per frame
@@ -44,22 +46,25 @@ public class MapManager : MonoBehaviour
 				{
 					case 1:
 					LastObjectCleanup();
-					SpawnCounter = 12;
-					SpawnLoop(SpawnCounter, SecondLevelObject);
+					InstantiateCounter = 12;
+					//InstantiateObjectLoop(InstantiateCounter, SecondLevelObject);
+					InstantiateObjectLoop(InstantiateCounter, LevelFilePaths[1]);
 					levelmanager.f = false;
 						break;
 
 					case 2:
 					LastObjectCleanup();
-					SpawnCounter = 30;
-					SpawnLoop(SpawnCounter, thridLevelObject);
+					InstantiateCounter = 30;
+					//InstantiateObjectLoop(InstantiateCounter, thridLevelObject);
+					InstantiateObjectLoop(InstantiateCounter, LevelFilePaths[2]);
 					levelmanager.f = false;
 						break;
 
 					case 3:
 					LastObjectCleanup();
-					SpawnCounter = 44;
-					SpawnLoop(SpawnCounter, FourthLevelObject);
+					InstantiateCounter = 44;
+					//InstantiateObjectLoop(InstantiateCounter, FourthLevelObject);
+					InstantiateObjectLoop(InstantiateCounter, LevelFilePaths[3]);
 					levelmanager.f = false;
 						break;
 				}
@@ -67,16 +72,11 @@ public class MapManager : MonoBehaviour
 
 	}
 
-	void SpwanMap(String FilePath)
+	void InstantiateObject(String FilePath)
 	{
-		//This loads the object from a file path
-		//ObjectToLoadFromFile = Resources.Load<GameObject>("Shapes/" + FilePath);
-		//ObjectToInstantiate = Instantiate(ObjectToLoadFromFile, GetRandomLocation(), Quaternion.identity);
 		
-		//The above is another way of writing this function
-
 		//Instantiates the object, sets a "reference" to that object but this leads to a memory leck so we add it to the list so we can keep that reference
-		ObjectToInstantiate = Instantiate(Resources.Load<GameObject>("Shapes/" + FilePath), GetRandomLocation(), Quaternion.identity);
+		ObjectToInstantiate = Instantiate(Resources.Load<GameObject>(FilePath), GetRandomLocation(), Quaternion.identity);
 
 		ListOfActiveGameObjects.Add(ObjectToInstantiate);
 	}
@@ -105,11 +105,11 @@ public class MapManager : MonoBehaviour
 	}
 
 	//Does what is says it does, pass the number of objects you want to instantiate and the file path.
-	void SpawnLoop(int SpawnCounter, String FilePath)
+	void InstantiateObjectLoop(int SpawnCounter, String FilePath)
 	{
 		for (int i = 0; i < SpawnCounter; i++)
 		{
-			SpwanMap(FilePath);
+			InstantiateObject(FilePath);
 		}
 	}
 

@@ -293,11 +293,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelmanager: {fileID: 722736178}
-  SpawnCounter: 99
-  FirstLevelObject: Capsule
-  SecondLevelObject: Cube
-  thridLevelObject: Cylinder
-  FourthLevelObject: Sphere
+  InstantiateCounter: 33
+  LevelFilePaths:
+  - Shapes/Capsule
+  - Shapes/Cube
+  - Shapes/Cylinder
+  - Shapes/Sphere
+  FirstLevelObject: Shapes/Capsule
+  SecondLevelObject: Shapes/Cube
+  thridLevelObject: Shapes/Cylinder
+  FourthLevelObject: Shapes/Sphere
   ListOfActiveGameObjects: []
 --- !u!114 &722736178
 MonoBehaviour:
